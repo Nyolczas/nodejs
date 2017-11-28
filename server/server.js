@@ -1,5 +1,6 @@
 // Http modul beolvasása
 var http = require( "http" ),
+    fs = require( "fs" ),
     port = 3333;
 
 
@@ -8,7 +9,10 @@ http.createServer( function( request, response) {
     
     response.setHeader('Access-Control-Allow-Origin', '*');
    
-    response.end( "Hello NodeJS!" );
+    // Termékek lekérése a filerendszerből
+    var products = fs.readFileSync( 'json/products.json', 'utf8');
+    
+    response.end( products );
     
 } ).listen( port );
 
