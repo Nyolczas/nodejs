@@ -17,3 +17,8 @@ http.createServer( function( request, response) {
 } ).listen( port );
 
 console.log("Server listen in "+port+" port." );
+
+/*
+Szerver indítása parancssorból (ugyanabból a mappából): node server 
+Szerver leállítása parancssorból: Ctrl+C
+*/
