@@ -4,7 +4,7 @@ Valós környezetben port = 80; <- minden kérés erre jön
 
 // Http modul beolvasása
 var http = require( "http" ),
-    fs = require( "fs" ),
+    fs = require( "fs" ), //beépített modul fileSystem olvasáshoz
     port = 3333;
 
 
