@@ -1,3 +1,7 @@
+/*
+Valós környezetben port = 80; <- minden kérés erre jön
+*/
+
 // Http modul beolvasása
 var http = require( "http" ),
     fs = require( "fs" ),
