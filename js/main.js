@@ -10,7 +10,7 @@ function showProducts( products ) {
     var content = '<ul>';
     products = JSON.parse( products );
     for ( var k in products) {
-        content += '<li><b>'+products[k].name+'</b></li>';
+        content += '<li><b>'+products[k].name+': </b> '+products[k].price+'</li>';
     }
     content += '</ul>';
     productsDiv.innerHTML = content;
@@ -21,6 +21,8 @@ var xhr = new XMLHttpRequest();
 xhr.open( "get", "http://localhost:3333" );
 xhr.onload = function() {
     //sendToLog( this.response);
-    showProducts( this.response );
+    showProducts( this.response ); //Termékek megjelenítése
 };
 xhr.send();
+
+//Változtatások után grunt paranccsal tömöríteni kell (fő mappában), majd újraindítani a szervert (szerver mappában: node server)
