@@ -13,8 +13,9 @@ http.createServer( function( request, response) {
     
     response.setHeader('Access-Control-Allow-Origin', '*');
    
-    // Termékek lekérése a filerendszerből
+    // Termékek lekérése a file-rendszerből
     var products = fs.readFileSync( 'json/products.json', 'utf8');
+    //docs: https://nodejs.org/dist/latest-v8.x/docs/api/fs.html#fs_fs_readfile_path_options_callback
     
     response.end( products );
     
