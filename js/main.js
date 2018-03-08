@@ -1,23 +1,24 @@
 // Szerverválaszok logolása
-function sendToLog( log) {
+function sendToLog(log) {
     var timeStamp = new Date().getTime();
-    document.querySelector( "#node-konzol").innerHTML += "\n"+timeStamp+": "+log;
+    document.querySelector("#node-konzol").innerHTML += "\n" + timeStamp + ": " + log;
 }
 
 // Termékek megjelenítése
-var productsDiv = document.querySelector( ".products-div" );
-function showProducts( products ) {
+var productsDiv = document.querySelector(".products-div");
+
+function showProducts(products) {
     var content = '<ul>';
-    products = JSON.parse( products );
-    for ( var k in products) {
-        content += '<li><b>'+products[k].name+': </b> '+products[k].price+'</li>';
+    products = JSON.parse(products);
+    for (var k in products) {
+        content += '<li><b>' + products[k].name + ': </b> ' + products[k].price + '</li>';
     }
     content += '</ul>';
     productsDiv.innerHTML = content;
 }
 
 // Ajax kérés indítása a Node szerver felé
-var xhr = new XMLHttpRequest();
+/*var xhr = new XMLHttpRequest();
 xhr.open( "get", "http://localhost:3333" );
 xhr.onload = function() {
     //sendToLog( this.response);
@@ -26,3 +27,14 @@ xhr.onload = function() {
 xhr.send();
 
 //Változtatások után grunt paranccsal tömöríteni kell (fő mappában), majd újraindítani a szervert (szerver mappában: node server)
+*/
+
+// socket.io kliens oldali kommunikáció
+
+var socket = io('http://localhost:3333');
+socket.on('news', function (data) {
+    console.log(data);
+    socket.emit('my other event', {
+        my: 'data'
+    });
+});
