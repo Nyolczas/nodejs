@@ -1,8 +1,7 @@
 // Szükséges modulok beolvasása
-var itfactory = require("itfactory"),
-    fs = require("fs");
+var itfactory = require("itfactory");
 
 // Termékek lekérése a file-rendszerből
-    var products = itfactory.readAsJSON( 'json/products.json', 'utf8');
+var products = itfactory.find('json/products.json', 'name', 'Borotva', 'utf8');
 
 itfactory.showConsoleMessage(products);
