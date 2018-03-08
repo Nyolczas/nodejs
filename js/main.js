@@ -30,11 +30,30 @@ xhr.send();
 */
 
 // socket.io kliens oldali kommunikáció
-
 var socket = io('http://localhost:3333');
-socket.on('news', function (data) {
-    console.log(data);
-    socket.emit('my other event', {
-        my: 'data'
-    });
+
+//Üzenetek megjelenítése
+var area = document.querySelector("#node-console");
+
+function showSocketMessage(message) {
+    area.innerHTML += message + "\n";
+}
+
+// Üzenetek küldése
+var messageInput = document.querySelector("#my-message");
+messageInput.addEventListener("keyup", function (e) {
+    if (e.keyCode === 13) {
+        socket.emit('send-message', messageInput.value);
+        messageInput.value = "";
+    }
+})
+document.querySelector("#send-message").addEventListener("click", function () {
+    socket.emit('send-message', messageInput.value);
+    messageInput.value = "";
+});
+
+
+socket.on('chat-message', function (data) {
+    showSocketMessage(data);
+
 });

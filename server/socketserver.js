@@ -2,7 +2,7 @@ var app = require('http').createServer(handler)
 var io = require('socket.io')(app);
 var fs = require('fs');
 
-app.listen(3333); 
+app.listen(3333);
 
 function handler (req, res) {
   fs.readFile(__dirname + '/index.html',
@@ -17,9 +17,19 @@ function handler (req, res) {
   });
 }
 
+// Időbélyeg készítése.
+function getTimeStamp() {
+    var currentDate = new Date(),
+        stamp = currentDate.getHours()+":"+currentDate.getMinutes()
+                +":"+currentDate.getSeconds();
+    return stamp;
+}
+
 io.on('connection', function (socket) {
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
-    console.log(data);
+  socket.on('send-message', function (data) {
+      
+      data = "<b>"+getTimeStamp()+":</b> "+data;
+      
+      socket.broadcast.emit( 'chat-message', data );
   });
 });
